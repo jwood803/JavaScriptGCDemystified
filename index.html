@@ -33,7 +33,6 @@
 			<div class="slides">
 				<section>
 					<h1>JavaScript Garbage Collector Demystified</h1>
-					<h3>Seek and find the truth of JavaScript memory.</h3>
 					<p>
 						<small>Created by Jonathan Wood / <a href="http://dotnetmeditations.com">dotnetmeditations.com</a> / <a href="http://twitter.com/jwood">@JWood</a></small>
 					</p>
@@ -65,10 +64,32 @@
 					</section>
 				</section>
 
+				<section id="markAndSweep">
+					<h2>Mark and Sweep Algorithm</h2>
+				</section>
+
+				<section id="chakraEngine">
+					<h2>Chakra (IE9+) Engine</h2>
+				</section>
+
+				<section id="v8Engine">
+					<h2>V8 (Chrome) Engine</h2>
+				</section>
+
+				<section id="findIssues">
+					<section id="findFragments">
+						<h2>How to find memory issues?</h2>
+						<ul>
+							<li class="fragment">Timeline</li>
+							<li class="fragment">Heap Profiler</li>
+						</ul>
+					</section>					
+				</section>
+
 		        <section id="sources">
 		          <h2>Sources</h2>
 		          <ul>
-		            <li><a href="http://www.html5rocks.com/en/tutorials/memory/effectivemanagement/">Effectively Managing Memory at Gmail scale</a></li>
+		            <li><a href="http://www.html5rocks.com/en/tutorials/memory/effectivemanagement/">Effectively Managing Memory at Gmail Scale</a></li>
 		            <li><a href="http://coding.smashingmagazine.com/2012/11/05/writing-fast-memory-efficient-javascript/">Writing Fast Memory Efficient JavaScript</a></li>
 		          </ul>
 		        </section>
@@ -80,17 +101,14 @@
 		<script src="js/reveal.min.js"></script>
 
 		<script>
-
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				controls: true,
 				progress: true,
 				history: true,
 				center: true,
 
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme - Wintellect theme?
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+				theme: Reveal.getQueryHash().theme,
+				transition: Reveal.getQueryHash().transition || 'default',
 
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
@@ -101,8 +119,6 @@
 					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } }
         		]
 			});
-
 		</script>
-
 	</body>
 </html>
