@@ -94,13 +94,13 @@
 				</section>
 
 				<section id="afterGC">
-					<h2>After a GC</h2>				
-					<img src="img/diagrams/JavaScript Object Graph After GC.png">						
+					<h2>After a GC</h2>
+					<img src="img/diagrams/JavaScript Object Graph After GC.png">
 				</section>
 
 				<section id="v8Engine">
 					<section id="generations">
-						<h2>V8 (Chrome) Engine Specifics</h2>
+						<h2>V8 Engine Specifics</h2>
 						<ul>
 							<li class="fragment">Generational</li>
 							<ul>
@@ -115,6 +115,10 @@
 					<h2>Young Generation</h2>
 				</section>
 
+        <section id="oldGen">
+          <h2>Old Generation</h2>
+        </section>
+
 				<section id="findIssues">
 					<section id="findFragments">
 						<h2>How do I know I have memory issues?</h2>
@@ -122,51 +126,58 @@
 							<li class="fragment">Users</li>
 							<li class="fragment">Crashes</li>
 							<li class="fragment">Collecting data</li>
-							<ul>
-								<li class="fragment">window.performance.memory API</li>
-							</ul>
 						</ul>
 					</section>
 				</section>
+
+        <section id="collectData">
+          <h2>How to collect memory data?</h2>
+          <img src="img/screenshots/performance.memoryScreenshot.png">
+          <ul>
+            <li>jsHeapSizeLimit - Memory the JavaScript heap is limited to</li>
+            <li>usedJSHeapSize - Memory currently being used</li>
+            <li>totalJSHeapSize - Memory that has been allocated on the JavaScript heap (includes free space)</li>
+          </ul>
+        </section>
 
 				<section id="demo">
 					<h2>Demo time!</h2>
 				</section>
 
-		        <section id="sources">
-		          <h2>Sources</h2>
-		          <ul>
-		            <li><a href="http://www.html5rocks.com/en/tutorials/memory/effectivemanagement/">Effectively Managing Memory at Gmail Scale</a></li>
-		            <li><a href="http://coding.smashingmagazine.com/2012/11/05/writing-fast-memory-efficient-javascript/">Writing Fast Memory Efficient JavaScript</a></li>
-		          </ul>
-		        </section>
+        <section id="sources">
+          <h2>Sources</h2>
+          <ul>
+            <li><a href="http://www.html5rocks.com/en/tutorials/memory/effectivemanagement/">Effectively Managing Memory at Gmail Scale</a></li>
+            <li><a href="http://coding.smashingmagazine.com/2012/11/05/writing-fast-memory-efficient-javascript/">Writing Fast Memory Efficient JavaScript</a></li>
+          </ul>
+        </section>
 
-		        <section id="takeAways">
-		        	<section id="takeAwayFragments">
-		        		<h2>It's dangerous out there!</h2>
-		        		<ul>
-		        			<li class="fragment">High number of GCs will cause performance problems</li>
-		        		</ul>
-		        	</section>
-		        </section>
+        <section id="takeAways">
+        	<section id="takeAwayFragments">
+        		<h2>It's dangerous out there!</h2>
+        		<ul>
+        			<li class="fragment">High number of GCs will cause performance problems</li>
+        		</ul>
+        	</section>
+        </section>
 
-		        <section id="relatedInfo">
-		          <h2>Related Info</h2>
-		          <p>
-		              <a class="image" href="http://www.wintellectnow.com"><img width="620" height="240" src="img/logos/wintellectnow-logo-620x240.png" alt="WintellectNOW"></a>
-		          </p>
-		        </section>
+        <section id="relatedInfo">
+          <h2>Related Info</h2>
+          <p>
+              <a class="image" href="http://www.wintellectnow.com"><img width="620" height="240" src="img/logos/wintellectnow-logo-620x240.png" alt="WintellectNOW"></a>
+          </p>
+        </section>
 
-		        <section id="contact">
-		          <h2>Thank you!</h2>
-		          <p>Email:</br>
-		             Blog: <a href="http://dotnetmeditations.com">dotnetmeditations.com</a> / <a href="http://www.wintellect.com/blogs/jwood">Wintellect</a></br>
-		             Twitter: <a href="http://twitter.com/jwood">@JWood</a></br>
-		          </p>
-		          <small>Presentation can be found on <a href="https://github.com/jwood803/JavaScriptGCDemystified">GitHub</a><br>
-		          	Demo code can be found at <a href="http://goo.gl/uI4D4">http://goo.gl/uI4D4</a>
-		          </small>
-		        </section>
+        <section id="contact">
+          <h2>Thank you!</h2>
+          <p>Email:</br>
+             Blog: <a href="http://dotnetmeditations.com">dotnetmeditations.com</a> / <a href="http://www.wintellect.com/blogs/jwood">Wintellect</a></br>
+             Twitter: <a href="http://twitter.com/jwood">@JWood</a></br>
+          </p>
+          <small>Presentation can be found on <a href="https://github.com/jwood803/JavaScriptGCDemystified">GitHub</a><br>
+          	Demo code can be found at <a href="http://goo.gl/uI4D4">http://goo.gl/uI4D4</a>
+          </small>
+        </section>
 			</div>
 		</div>
 
