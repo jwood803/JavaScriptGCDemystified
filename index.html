@@ -79,13 +79,43 @@
 					<h2>How does memory work in JavaScript?</h2>
 				</section>
 
+        <section id="primitiveTypes">
+          <section class="fragment" id="primTypes">
+            <h2>Primitive Types</h2>
+          </section>
+          <section class="fragment" id="numTypes">
+            <p>Numbers</p>
+            <pre><code data-trim contenteditable>
+var num = 12;
+
+var num2 = 3.14;
+            </code></pre>
+          </section>
+          <section class="fragment" id="numTypes">
+            <p>Strings</p>
+            <pre><code data-trim contenteditable>
+var hello = "Hello, Carolina Code Camp!";
+
+var sub = num.substr(0, 3);
+            </code></pre>
+          </section>
+          <section class="fragment" id="numTypes">
+            <p>Booleans</p>
+            <pre><code data-trim contenteditable>
+var truthy = true;
+
+truthy = false; // Oh, noes!
+            </code></pre>
+          </section>
+        </section>
+
 				<section id="objectGraph">
 					<h2>JavaScript Object Graph</h2>
 					<img src="img/diagrams/JavaScript Object Graph.png">
 				</section>
 
 				<section id="duringGC">
-					<h2>What happens during a GC?</h2>
+					<h2>What happens during a GC in JavaScript?</h2>
 				</section>
 
 				<section id="beforeGC">
@@ -100,7 +130,7 @@
 
 				<section id="v8Engine">
 					<section id="generations">
-						<h2>V8 Engine Specifics</h2>
+						<h2>V8 Engine</h2>
 						<ul>
 							<li class="fragment">Generational</li>
 							<ul>
