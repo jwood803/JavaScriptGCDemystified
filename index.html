@@ -34,7 +34,8 @@
 				<section>
 					<h1>JavaScript Garbage Collector Demystified</h1>
 					<p>
-						<small>Created by Jonathan Wood / <a href="http://dotnetmeditations.com">dotnetmeditations.com</a> / <a href="http://twitter.com/jwood">@JWood</a></small>
+						<small>Created by Jonathan Wood</br>
+            / <a href="http://dotnetmeditations.com">dotnetmeditations.com</a> / <a href="http://twitter.com/jwood">@JWood</a></small>
 					</p>
 				</section>
 
@@ -49,9 +50,10 @@
 					</ul>
 				</section>
 
-				<section id="whoAmI">
-					<h2>Who is this guy?</h2>
-				</section>
+        <section id="intro">
+          <h2>Who is this guy?</h2>
+          <a class="image" href="http://www.wintellect.com"><img width="620" height="240" src="img/logos/" alt="Wintellect"></a>
+        </section>
 
 				<section>
 					<section id="fragments">
@@ -147,6 +149,13 @@ truthy = false; // Oh, noes!
 
 				<section id="youngGen">
 					<h2>Young Generation</h2>
+          <ul>
+            <li class="fragment">
+              Split into two spaces - to and from
+              <img src="img/diagrams/">
+            </li>
+            <li class="fragment">Allocates (very fast) until the "to" space is full. GC triggered.</li>
+          </ul>
 				</section>
 
         <section id="oldGen">
