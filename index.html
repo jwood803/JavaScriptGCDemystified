@@ -35,7 +35,7 @@
 					<h1>JavaScript Garbage Collector Demystified</h1>
 					<p>
 						<small>Created by Jonathan Wood</br>
-            / <a href="http://dotnetmeditations.com">dotnetmeditations.com</a> / <a href="http://twitter.com/jwood">@JWood</a></small>
+            			/ <a href="http://dotnetmeditations.com">dotnetmeditations.com</a> / <a href="http://twitter.com/jwood">@JWood</a></small>
 					</p>
 				</section>
 
@@ -50,113 +50,116 @@
 					</ul>
 				</section>
 
-        <section id="intro">
-          <h2>Who is this guy?</h2>
-          <a class="image" href="http://www.wintellect.com"><img width="620" height="240" src="img/logos/" alt="Wintellect"></a>
-        </section>
+	        <section id="intro">
+	          <h2>Who is this guy?</h2>
+	          <a class="image" href="http://www.wintellect.com"><img width="620" height="240" src="img/logos/WintellectLogo.jpg" alt="Wintellect"></a>
+	        </section>
 
-				<section>
-					<section id="fragments">
-						<h2>Biggest performance problems in .NET?</h2>
-						<ol>
-							<li class="fragment">Memory</li>
-							<li class="fragment">...memory</li>
-							<li class="fragment">...and memory</li>
-						</ol>
-					</section>
+			<section>
+				<section id="fragments">
+					<h2>Biggest performance problems in .NET?</h2>
+					<ol>
+						<li class="fragment">Memory</li>
+						<li class="fragment">...memory</li>
+						<li class="fragment">...and memory</li>
+					</ol>
 				</section>
+			</section>
 
-				<section>
+			<section id="whyMatter">
+				<section class="fragment" id="deadJim">
 					<h2>Why does this matter with JavaScript?</h2>
+					<img class="fragment" src="img/screenshots/hesdead.png">
 				</section>
+			</section>
 
-				<section id="lifecycle">
-					<section id="lcFragments">
-						<h2>Memory Lifecycle</h2>
-						<ol>
-							<li class="fragment">Allocate the memory during initialization</li>
-							<li class="fragment">Use it in the app</li>
-							<li class="fragment">Release when no longer needed</li>
-						</ol>
-					</section>
+<!-- 			<section id="lifecycle">
+				<section id="lcFragments">
+					<h2>Memory Lifecycle</h2>
+					<ol>
+						<li class="fragment">Allocate the memory during initialization</li>
+						<li class="fragment">Use it in the app</li>
+						<li class="fragment">Release when no longer needed</li>
+					</ol>
 				</section>
+			</section> -->
 
-				<section id="javascriptMemory">
-					<h2>How does memory work in JavaScript?</h2>
-				</section>
+			<section id="javascriptMemory">
+				<h2>How does memory work in JavaScript (V8 engie)?</h2>
+			</section>
 
-        <section id="primitiveTypes">
-          <section class="fragment" id="primTypes">
-            <h2>Primitive Types</h2>
-          </section>
-          <section class="fragment" id="numTypes">
-            <p>Numbers</p>
-            <pre><code data-trim contenteditable>
-var num = 12;
+	        <section id="primitiveTypes">
+	          <section class="fragment" id="primTypes">
+	            <h2>Primitive Types</h2>
+	          </section>
+	          <section class="fragment" id="numTypes">
+	            <p>Numbers</p>
+	            <pre><code data-trim contenteditable>
+	var num = 12;
 
-var num2 = 3.14;
-            </code></pre>
-          </section>
-          <section class="fragment" id="numTypes">
-            <p>Strings</p>
-            <pre><code data-trim contenteditable>
-var hello = "Hello, Carolina Code Camp!";
+	var num2 = 3.14;
+	            </code></pre>
+	          </section>
+	          <section class="fragment" id="numTypes">
+	            <p>Strings</p>
+	            <pre><code data-trim contenteditable>
+	var hello = "Hello, Carolina Code Camp!";
 
-var sub = num.substr(0, 3);
-            </code></pre>
-          </section>
-          <section class="fragment" id="numTypes">
-            <p>Booleans</p>
-            <pre><code data-trim contenteditable>
-var truthy = true;
+	var sub = num.substr(0, 3);
+	            </code></pre>
+	          </section>
+	          <section class="fragment" id="numTypes">
+	            <p>Booleans</p>
+	            <pre><code data-trim contenteditable>
+	var truthy = true;
 
-truthy = false; // Oh, noes!
-            </code></pre>
-          </section>
-        </section>
+	truthy = false; // Oh, noes!
+	            </code></pre>
+	          </section>
+	        </section>
 
-				<section id="objectGraph">
-					<h2>JavaScript Object Graph</h2>
-					<img src="img/diagrams/JavaScript Object Graph.png">
-				</section>
+			<section id="objectGraph">
+				<h2>JavaScript Object Graph</h2>
+				<img src="img/diagrams/JavaScript Object Graph.png">
+			</section>
 
-				<section id="duringGC">
-					<h2>What happens during a GC in JavaScript?</h2>
-				</section>
+			<section id="duringGC">
+				<h2>What happens during a GC in JavaScript?</h2>
+			</section>
 
-				<section id="beforeGC">
-					<h2>Before a GC</h2>
-					<img src="img/diagrams/JavaScript Object Graph Before GC.png">
-				</section>
+			<section id="beforeGC">
+				<h2>Before a GC</h2>
+				<img src="img/diagrams/JavaScript Object Graph Before GC.png">
+			</section>
 
-				<section id="afterGC">
-					<h2>After a GC</h2>
-					<img src="img/diagrams/JavaScript Object Graph After GC.png">
-				</section>
+			<section id="afterGC">
+				<h2>After a GC</h2>
+				<img src="img/diagrams/JavaScript Object Graph After GC.png">
+			</section>
 
-				<section id="v8Engine">
-					<section id="generations">
-						<h2>V8 Engine</h2>
+			<section id="v8Engine">
+				<section id="generations">
+					<h2>V8 Engine</h2>
+					<ul>
+						<li class="fragment">Generational</li>
 						<ul>
-							<li class="fragment">Generational</li>
-							<ul>
-								<li class="fragment">Young</li>
-								<li class="fragment">Old</li>
-							</ul>
+							<li class="fragment">Young</li>
+							<li class="fragment">Old</li>
 						</ul>
-					</section>
+					</ul>
 				</section>
+			</section>
 
-				<section id="youngGen">
-					<h2>Young Generation</h2>
-          <ul>
-            <li class="fragment">
-              Split into two spaces - to and from
-              <img src="img/diagrams/">
-            </li>
-            <li class="fragment">Allocates (very fast) until the "to" space is full. GC triggered.</li>
-          </ul>
-				</section>
+			<section id="youngGen">
+				<h2>Young Generation</h2>
+		        <ul>
+	            	<li class="fragment">
+		              Split into two spaces - to and from
+		              <img src="img/diagrams/">
+		            </li>
+		            <li class="fragment">Allocates (very fast) until the "to" space is full. GC is triggered.</li>
+          		</ul>
+			</section>
 
         <section id="oldGen">
           <h2>Old Generation</h2>
