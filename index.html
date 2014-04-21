@@ -61,7 +61,7 @@
 					<ol>
 						<li class="fragment">Memory</li>
 						<li class="fragment">...memory</li>
-						<li class="fragment">...and memory</li>
+						<li class="fragment">...and more memory</li>
 					</ol>
 				</section>
 			</section>
@@ -95,25 +95,25 @@
 	          <section class="fragment" id="numTypes">
 	            <p>Numbers</p>
 	            <pre><code data-trim contenteditable>
-	var num = 12;
+var num = 12;
 
-	var num2 = 3.14;
+var num2 = 2.35;
 	            </code></pre>
 	          </section>
 	          <section class="fragment" id="numTypes">
 	            <p>Strings</p>
 	            <pre><code data-trim contenteditable>
-	var hello = "Hello, Carolina Code Camp!";
+var hello = "Hello, Carolina Code Camp!";
 
-	var sub = num.substr(0, 3);
+var sub = num.substr(0, 3);
 	            </code></pre>
 	          </section>
 	          <section class="fragment" id="numTypes">
 	            <p>Booleans</p>
 	            <pre><code data-trim contenteditable>
-	var truthy = true;
+var isTruthy = true;
 
-	truthy = false; // Oh, noes!
+isTruthy = false; // Oh, noes!
 	            </code></pre>
 	          </section>
 	        </section>
@@ -153,42 +153,42 @@
 			<section id="youngGen">
 				<h2>Young Generation</h2>
 		        <ul>
-	            	<li class="fragment">
-		              Split into two spaces - to and from
-		              <img src="img/diagrams/">
-		            </li>
-		            <li class="fragment">Allocates (very fast) until the "to" space is full. GC is triggered.</li>
+	            	<li class="fragment">Split into two spaces - to and from</li>
           		</ul>
 			</section>
 
-        <section id="oldGen">
-          <h2>Old Generation</h2>
-        </section>
+	        <section id="oldGen">
+	          <h2>Old Generation</h2>
+  		      <ul>
+        		<li class="fragment"><strong>Infrequently</strong> collected</li>
+        		<li class="fragment">Collected with page execution</li>
+  			  </ul>
+	        </section>
 
-				<section id="findIssues">
-					<section id="findFragments">
-						<h2>How do I know I have memory issues?</h2>
-						<ul>
-							<li class="fragment">Users</li>
-							<li class="fragment">Crashes</li>
-							<li class="fragment">Collecting data</li>
-						</ul>
-					</section>
+			<section id="findIssues">
+				<section id="findFragments">
+					<h2>How do I know I have memory issues?</h2>
+					<ul>
+						<li class="fragment">Users</li>
+						<li class="fragment">Crashes</li>
+						<li class="fragment">Collecting data</li>
+					</ul>
 				</section>
+			</section>
 
-        <section id="collectData">
-          <h2>How to collect memory data?</h2>
-          <img src="img/screenshots/performance.memoryScreenshot.png">
-          <ul>
-            <li>jsHeapSizeLimit - Memory the JavaScript heap is limited to</li>
-            <li>usedJSHeapSize - Memory currently being used</li>
-            <li>totalJSHeapSize - Memory that has been allocated on the JavaScript heap (includes free space)</li>
-          </ul>
-        </section>
+	        <section id="collectData">
+	          <h2>How to collect memory data?</h2>
+	          <img src="img/screenshots/performance.memoryScreenshot.png">
+	          <ul>
+	            <li>jsHeapSizeLimit - Memory the JavaScript heap is limited to</li>
+	            <li>usedJSHeapSize - Memory currently being used</li>
+	            <li>totalJSHeapSize - Memory that has been allocated on the JavaScript heap (includes free space)</li>
+	          </ul>
+	        </section>
 
-				<section id="demo">
-					<h2>Demo time!</h2>
-				</section>
+			<section id="demo">
+				<h2>Demo time!</h2>
+			</section>
 
         <section id="sources">
           <h2>Sources</h2>
