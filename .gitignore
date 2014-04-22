@@ -1,1 +1,5 @@
 *.sublime-workspace
+
+# Rather send people to the original source than uploading it to the repo
+js/Demo/main.js
+js/Demo/index.html
