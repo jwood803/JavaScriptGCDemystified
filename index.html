@@ -1,24 +1,24 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+<head>
+	<meta charset="utf-8">
 
-		<title>JavaScript Garbage Collector Demystified</title>
+	<title>JavaScript Garbage Collector Demystified</title>
 
-		<meta name="description" content="Introduction to the JavaScript garbage collector.">
-		<meta name="author" content="Jonathan Wood">
+	<meta name="description" content="Introduction to the JavaScript garbage collector.">
+	<meta name="author" content="Jonathan Wood">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+	<link rel="stylesheet" href="css/reveal.min.css">
+	<link rel="stylesheet" href="css/theme/night.css" id="theme">
 
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+	<!-- For syntax highlighting -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
 
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
@@ -35,246 +35,235 @@
 					<h1>JavaScript Garbage Collector Demystified</h1>
 					<p>
 						<small>Created by Jonathan Wood</br>
-            			/ <a href="http://dotnetmeditations.com">dotnetmeditations.com</a> / <a href="http://twitter.com/jwood">@JWood</a></small>
-					</p>
-				</section>
+							/ <a href="http://dotnetmeditations.com">dotnetmeditations.com</a> / <a href="http://twitter.com/jwood">@JWood</a></small>
+						</p>
+					</section>
 
-				<section id="agenda">
-					<h2>Agenda</h2>
-					<ul>
-						<li>Intro</li>
-						<li>Why should you care?</li>
-						<li>Garbage Collector algorithms</li>
-						<li>Dev Tools Overview</li>
-						<li>Demo</li>
-					</ul>
-				</section>
-
-	        <section id="intro">
-	          <h2>Who is this guy?</h2>
-	          <a class="image" href="http://www.wintellect.com"><img width="620" height="240" src="img/logos/WintellectLogo.jpg" alt="Wintellect"></a>
-	        </section>
-
-			<section>
-				<section id="fragments">
-					<h2>Biggest performance problems in .NET?</h2>
-					<ol>
-						<li class="fragment">Memory</li>
-						<li class="fragment">...memory</li>
-						<li class="fragment">...and more memory</li>
-					</ol>
-				</section>
-			</section>
-
-			<section id="whyMatter">
-				<section class="fragment" id="deadJim">
-					<h2>Why does this matter with JavaScript?</h2>
-					<img class="fragment" src="img/screenshots/hesdead.png">
-				</section>
-			</section>
-
-<!-- 			<section id="lifecycle">
-				<section id="lcFragments">
-					<h2>Memory Lifecycle</h2>
-					<ol>
-						<li class="fragment">Allocate the memory during initialization</li>
-						<li class="fragment">Use it in the app</li>
-						<li class="fragment">Release when no longer needed</li>
-					</ol>
-				</section>
-			</section> -->
-
-			<section id="javascriptMemory">
-				<h2>How does memory work in JavaScript (V8 engie)?</h2>
-			</section>
-
-	        <section id="primitiveTypes">
-	          <section class="fragment" id="primTypes">
-	            <h2>Primitive Types</h2>
-	          </section>
-	          <section class="fragment" id="numTypes">
-	            <p>Numbers</p>
-	            <pre><code data-trim contenteditable>
-var num = 12;
-
-var num2 = 2.35;
-	            </code></pre>
-	          </section>
-	          <section class="fragment" id="numTypes">
-	            <p>Strings</p>
-	            <pre><code data-trim contenteditable>
-var hello = "Hello, Carolina Code Camp!";
-
-var sub = num.substr(0, 3);
-	            </code></pre>
-	          </section>
-	          <section class="fragment" id="numTypes">
-	            <p>Booleans</p>
-	            <pre><code data-trim contenteditable>
-var isTruthy = true;
-
-isTruthy = false; // Oh, noes!
-	            </code></pre>
-	          </section>
-	        </section>
-
-			<section id="objectGraph">
-				<h2>JavaScript Object Graph</h2>
-				<img src="img/diagrams/JavaScript Object Graph.jpg">
-			</section>
-
-			<section id="duringGC">
-				<h2>What happens during a GC in JavaScript?</h2>
-			</section>
-
-			<section id="beforeGC">
-				<h2>Before a GC</h2>
-				<img src="img/diagrams/JavaScript Object Graph Before GC.jpg">
-			</section>
-
-			<section id="afterGC">
-				<h2>After a GC</h2>
-				<img src="img/diagrams/JavaScript Object Graph After GC.jpg">
-			</section>
-
-			<section id="v8Engine">
-				<section id="generations">
-					<h2>V8 Engine</h2>
-					<ul>
-						<li class="fragment">Generational</li>
-						<ul class="fragment">
-							<li>Young</li>
-							<li>Old</li>
+					<section id="agenda">
+						<h2>Agenda</h2>
+						<ul>
+							<li>Intro</li>
+							<li>Why should you care?</li>
+							<li>Garbage Collector algorithms</li>
+							<li>Dev Tools Overview</li>
+							<li>Demo</li>
 						</ul>
-					</ul>
-				</section>
-			</section>
+					</section>
 
-			<section id="youngGen">
-				<section class="fragment" id="youngGenIntro">
-					<h2>Young Generation</h2>
-			        <ul>
-		            	<li class="fragment">Split into two spaces - to and from</li>
-	          		</ul>
-          		</section>
+					<section id="intro">
+						<h2>Who is this guy?</h2>
+						<a class="image" href="http://www.wintellect.com"><img width="620" height="240" src="img/logos/WintellectLogo.jpg" alt="Wintellect"></a>
+					</section>
 
-          		<section class="fragment" id="toAndFrom">
-          			<img src="img/diagrams/Young Gen/1-toAndFrom.jpg">
-          		</section>
+					<section>
+						<section id="fragments">
+							<h2>Biggest performance problems in .NET?</h2>
+							<ol>
+								<li class="fragment">Memory</li>
+								<li class="fragment">...memory</li>
+								<li class="fragment">...and more memory</li>
+							</ol>
+						</section>
+					</section>
 
-          		<section class="fragment" id="beforeYoungGC">
-          			<img src="img/diagrams/Young Gen/2-beforeGC.jpg">
-          		</section>
+					<section id="whyMatter">
+						<section class="fragment" id="deadJim">
+							<h2>Why does this matter with JavaScript?</h2>
+							<img class="fragment" src="img/screenshots/hesdead.png">
+						</section>
+					</section>
 
-          		<section class="fragment" id="GCTriggered">
-          			<img src="img/diagrams/Young Gen/3-GCTriggered.jpg">c
-          		</section>
+					<section id="javascriptMemory">
+						<h2>How does memory work in JavaScript (V8 engie)?</h2>
+					</section>
 
-          		<section class="fragment" id="swapToFromSpace">
-          			<img src="img/diagrams/Young Gen/4-swapToFromSpace.jpg">
-          		</section>
+					<section id="primitiveTypes">
+						<section class="fragment" id="primTypes">
+							<h2>Primitive Types</h2>
+						</section>
+						<section class="fragment" id="numTypes">
+							<p>Numbers</p>
+							<pre><code data-trim contenteditable>
+								var num = 12;
 
-          		<section class="fragment" id="fromSpaceSweep">
-          			<img src="img/diagrams/Young Gen/5-fromSpaceSweep.jpg">
-          		</section>
+								var num2 = 2.35;
+							</code></pre>
+						</section>
+						<section class="fragment" id="numTypes">
+							<p>Strings</p>
+							<pre><code data-trim contenteditable>
+								var hello = "Hello, Carolina Code Camp!";
 
-          		<section class="fragment" id="afterSweeping">
-          			<img src="img/diagrams/Young Gen/6-afterSweeping.jpg">
-          		</section>
+								var sub = num.substr(0, 3);
+							</code></pre>
+						</section>
+						<section class="fragment" id="numTypes">
+							<p>Booleans</p>
+							<pre><code data-trim contenteditable>
+								var isTruthy = true;
 
-          		<section class="fragment" id="afterYoungGC">
-          			<img src="img/diagrams/Young Gen/7-afterGC.jpg">
-          		</section>          		          		          		          		          		
-			</section>
+								isTruthy = false; // Oh, noes!
+							</code></pre>
+						</section>
+					</section>
 
-	        <section id="oldGen">
-	          <h2>Old Generation</h2>
-  		      <ul>
-        		<li class="fragment"><strong>Infrequently</strong> collected</li>
-  			  </ul>
-	        </section>
+					<section id="objectGraph">
+						<h2>JavaScript Object Graph</h2>
+						<img src="img/diagrams/JavaScript Object Graph.jpg">
+					</section>
 
-			<section id="findIssues">
-				<section id="findFragments">
-					<h2>How do I know I have memory issues?</h2>
-					<ul>
-						<li class="fragment">Users</li>
-						<li class="fragment">Crashes</li>
-						<li class="fragment">Collecting data</li>
-					</ul>
-				</section>
-			</section>
+					<section id="duringGC">
+						<h2>What happens during a GC in JavaScript?</h2>
+					</section>
 
-	        <section id="collectData">
-	          <h2>How to collect memory data?</h2>
-	          <img src="img/screenshots/performance.memoryScreenshot.png">
-	          <ul>
-	            <li>jsHeapSizeLimit - Memory the JavaScript heap is limited to</li>
-	            <li>usedJSHeapSize - Memory currently being used</li>
-	            <li>totalJSHeapSize - Memory that has been allocated on the JavaScript heap (includes free space)</li>
-	          </ul>
-	        </section>
+					<section id="beforeGC">
+						<h2>Before a GC</h2>
+						<img src="img/diagrams/JavaScript Object Graph Before GC.jpg">
+					</section>
 
-			<section id="demo">
-				<h2>Demo time!</h2>
-			</section>
+					<section id="afterGC">
+						<h2>After a GC</h2>
+						<img src="img/diagrams/JavaScript Object Graph After GC.jpg">
+					</section>
 
-        <section id="takeAways">
-        	<section id="takeAwayFragments">
-        		<img src="img/screenshots/itsDangerous.jpg">
-        	</section>
-        </section>
+					<section id="v8Engine">
+						<section id="generations">
+							<h2>V8 Engine</h2>
+							<ul>
+								<li class="fragment">Generational</li>
+								<ul class="fragment">
+									<li>Young</li>
+									<li>Old</li>
+								</ul>
+							</ul>
+						</section>
+					</section>
 
-        <section id="relatedInfo">
-          <h2>Related Info</h2>
-          <p>
-              <a class="image" href="http://www.wintellectnow.com"><img width="620" height="240" src="img/logos/wintellectnow-logo-620x240.png" alt="WintellectNOW"></a>
-          </p>
-        </section>
-        
-        <section id="sources">
-          <h2>Sources</h2>
-          <ul>
-            <li><a href="http://www.html5rocks.com/en/tutorials/memory/effectivemanagement/">Effectively Managing Memory at Gmail Scale</a></li>
-            <li><a href="http://coding.smashingmagazine.com/2012/11/05/writing-fast-memory-efficient-javascript/">Writing Fast Memory Efficient JavaScript</a></li>
-          </ul>
-        </section>
+					<section id="youngGen">
+						<section class="fragment" id="youngGenIntro">
+							<h2>Young Generation</h2>
+							<ul>
+								<li class="fragment">Split into two spaces - to and from</li>
+							</ul>
+						</section>
 
-        <section id="contact">
-          <h2>Thank you!</h2>
-          <p>Email:</br>
-             Blog: <a href="http://dotnetmeditations.com">dotnetmeditations.com</a> / <a href="http://www.wintellect.com/blogs/jwood">Wintellect</a></br>
-             Twitter: <a href="http://twitter.com/jwood">@JWood</a></br>
-          </p>
-          <small>Presentation can be found on <a href="https://github.com/jwood803/JavaScriptGCDemystified">GitHub</a><br>
-          	Demo code can be found at <a href="http://goo.gl/uI4D4">http://goo.gl/uI4D4</a>
-          </small>
-        </section>
+						<section class="fragment" id="toAndFrom">
+							<img src="img/diagrams/Young Gen/1-toAndFrom.jpg">
+						</section>
+
+						<section class="fragment" id="beforeYoungGC">
+							<img src="img/diagrams/Young Gen/2-beforeGC.jpg">
+						</section>
+
+						<section class="fragment" id="GCTriggered">
+							<img src="img/diagrams/Young Gen/3-GCTriggered.jpg">c
+						</section>
+
+						<section class="fragment" id="swapToFromSpace">
+							<img src="img/diagrams/Young Gen/4-swapToFromSpace.jpg">
+						</section>
+
+						<section class="fragment" id="fromSpaceSweep">
+							<img src="img/diagrams/Young Gen/5-fromSpaceSweep.jpg">
+						</section>
+
+						<section class="fragment" id="afterSweeping">
+							<img src="img/diagrams/Young Gen/6-afterSweeping.jpg">
+						</section>
+
+						<section class="fragment" id="afterYoungGC">
+							<img src="img/diagrams/Young Gen/7-afterGC.jpg">
+						</section>          		          		          		          		          		
+					</section>
+
+					<section id="oldGen">
+						<h2>Old Generation</h2>
+						<ul>
+							<li class="fragment"><strong>Infrequently</strong> collected</li>
+						</ul>
+					</section>
+
+					<section id="findIssues">
+						<section id="findFragments">
+							<h2>How do I know I have memory issues?</h2>
+							<ul>
+								<li class="fragment">Users</li>
+								<li class="fragment">Crashes</li>
+								<li class="fragment">Collecting data</li>
+							</ul>
+						</section>
+					</section>
+
+					<section id="collectData">
+						<h2>How to collect memory data?</h2>
+						<img src="img/screenshots/performance.memoryScreenshot.png">
+						<ul>
+							<li>jsHeapSizeLimit - Memory the JavaScript heap is limited to</li>
+							<li>usedJSHeapSize - Memory currently being used</li>
+							<li>totalJSHeapSize - Memory that has been allocated on the JavaScript heap (includes free space)</li>
+						</ul>
+					</section>
+
+					<section id="demo">
+						<h2>Demo time!</h2>
+					</section>
+
+					<section id="takeAways">
+						<section id="takeAwayFragments">
+							<img src="img/screenshots/itsDangerous.jpg">
+						</section>
+					</section>
+
+					<section id="relatedInfo">
+						<h2>Related Info</h2>
+						<p>
+							<a class="image" href="http://www.wintellectnow.com"><img width="620" height="240" src="img/logos/wintellectnow-logo-620x240.png" alt="WintellectNOW"></a>
+						</p>
+					</section>
+
+					<section id="sources">
+						<h2>Sources</h2>
+						<ul>
+							<li><a href="http://www.html5rocks.com/en/tutorials/memory/effectivemanagement/">Effectively Managing Memory at Gmail Scale</a></li>
+							<li><a href="http://coding.smashingmagazine.com/2012/11/05/writing-fast-memory-efficient-javascript/">Writing Fast Memory Efficient JavaScript</a></li>
+						</ul>
+					</section>
+
+					<section id="contact">
+						<h2>Thank you!</h2>
+						<p>Email:</br>
+							Blog: <a href="http://dotnetmeditations.com">dotnetmeditations.com</a> / <a href="http://www.wintellect.com/blogs/jwood">Wintellect</a></br>
+							Twitter: <a href="http://twitter.com/jwood">@JWood</a></br>
+						</p>
+						<small>Presentation can be found on <a href="https://github.com/jwood803/JavaScriptGCDemystified">GitHub</a><br>
+							Demo code can be found at <a href="http://goo.gl/uI4D4">http://goo.gl/uI4D4</a>
+						</small>
+					</section>
+				</div>
 			</div>
-		</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
+			<script src="lib/js/head.min.js"></script>
+			<script src="js/reveal.min.js"></script>
 
-		<script>
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+			<script>
+				Reveal.initialize({
+					controls: true,
+					progress: true,
+					history: true,
+					center: true,
 
-				theme: Reveal.getQueryHash().theme,
-				transition: Reveal.getQueryHash().transition || 'default',
+					theme: Reveal.getQueryHash().theme,
+					transition: Reveal.getQueryHash().transition || 'default',
 
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } }
-        		]
+				{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+				{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
 			});
-		</script>
-	</body>
-</html>
+			</script>
+		</body>
+		</html>
