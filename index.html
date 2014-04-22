@@ -142,26 +142,55 @@ isTruthy = false; // Oh, noes!
 					<h2>V8 Engine</h2>
 					<ul>
 						<li class="fragment">Generational</li>
-						<ul>
-							<li class="fragment">Young</li>
-							<li class="fragment">Old</li>
+						<ul class="fragment">
+							<li>Young</li>
+							<li>Old</li>
 						</ul>
 					</ul>
 				</section>
 			</section>
 
 			<section id="youngGen">
-				<h2>Young Generation</h2>
-		        <ul>
-	            	<li class="fragment">Split into two spaces - to and from</li>
-          		</ul>
+				<section class="fragment" id="youngGenIntro">
+					<h2>Young Generation</h2>
+			        <ul>
+		            	<li class="fragment">Split into two spaces - to and from</li>
+	          		</ul>
+          		</section>
+
+          		<section class="fragment" id="toAndFrom">
+          			<img src="img/diagrams/Young Gen/1-toAndFrom.jpg">
+          		</section>
+
+          		<section class="fragment" id="beforeYoungGC">
+          			<img src="img/diagrams/Young Gen/2-beforeGC.jpg">
+          		</section>
+
+          		<section class="fragment" id="GCTriggered">
+          			<img src="img/diagrams/Young Gen/3-GCTriggered.jpg">c
+          		</section>
+
+          		<section class="fragment" id="swapToFromSpace">
+          			<img src="img/diagrams/Young Gen/4-swapToFromSpace.jpg">
+          		</section>
+
+          		<section class="fragment" id="fromSpaceSweep">
+          			<img src="img/diagrams/Young Gen/5-fromSpaceSweep.jpg">
+          		</section>
+
+          		<section class="fragment" id="afterSweeping">
+          			<img src="img/diagrams/Young Gen/6-afterSweeping.jpg">
+          		</section>
+
+          		<section class="fragment" id="afterYoungGC">
+          			<img src="img/diagrams/Young Gen/7-afterGC.jpg">
+          		</section>          		          		          		          		          		
 			</section>
 
 	        <section id="oldGen">
 	          <h2>Old Generation</h2>
   		      <ul>
         		<li class="fragment"><strong>Infrequently</strong> collected</li>
-        		<li class="fragment">Collected with page execution</li>
   			  </ul>
 	        </section>
 
