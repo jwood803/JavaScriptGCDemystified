@@ -35,8 +35,13 @@
 					<h1>JavaScript Garbage Collector Demystified</h1>
 					<p>
 						<small>Created by Jonathan Wood</br>
-							/ <a href="http://dotnetmeditations.com">dotnetmeditations.com</a> / <a href="http://twitter.com/jwood">@JWood</a></small>
+							jwood@wintellect.com / <a href="http://dotnetmeditations.com">dotnetmeditations.com</a> / <a href="http://twitter.com/jwood">@JWood</a></small>
 						</p>
+
+						<aside class="notes">
+				        Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window
+								(hit 's' on your keyboard).
+				    </aside>
 					</section>
 
 					<section id="agenda">
@@ -84,36 +89,36 @@
 						<section class="fragment" id="numTypes">
 							<p>Numbers</p>
 							<pre><code data-trim contenteditable>
-								var num = 12;
+var num = 12;
 
-								var num2 = 2.35;
+var num2 = 2.35;
 							</code></pre>
 						</section>
 						<section class="fragment" id="numTypes">
 							<p>Strings</p>
 							<pre><code data-trim contenteditable>
-								var hello = "Hello, Carolina Code Camp!";
+var hello = "Hello, Carolina Code Camp!";
 
-								var sub = num.substr(0, 3);
+var sub = num.substr(0, 3);
 							</code></pre>
 						</section>
 						<section class="fragment" id="numTypes">
 							<p>Booleans</p>
 							<pre><code data-trim contenteditable>
-								var isTruthy = true;
+var isTruthy = true;
 
-								isTruthy = false; // Oh, noes!
+isTruthy = false; // Oh, noes!
 							</code></pre>
 						</section>
+					</section>
+
+					<section id="duringGC">
+						<h2>What happens during a GC in JavaScript?</h2>
 					</section>
 
 					<section id="objectGraph">
 						<h2>JavaScript Object Graph</h2>
 						<img src="img/diagrams/JavaScript Object Graph.jpg">
-					</section>
-
-					<section id="duringGC">
-						<h2>What happens during a GC in JavaScript?</h2>
 					</section>
 
 					<section id="beforeGC">
@@ -173,7 +178,7 @@
 
 						<section class="fragment" id="afterYoungGC">
 							<img src="img/diagrams/Young Gen/7-afterGC.jpg">
-						</section>          		          		          		          		          		
+						</section>
 					</section>
 
 					<section id="oldGen">
@@ -231,7 +236,7 @@
 
 					<section id="contact">
 						<h2>Thank you!</h2>
-						<p>Email:</br>
+						<p>Email: jwood@wintellect.com</br>
 							Blog: <a href="http://dotnetmeditations.com">dotnetmeditations.com</a> / <a href="http://www.wintellect.com/blogs/jwood">Wintellect</a></br>
 							Twitter: <a href="http://twitter.com/jwood">@JWood</a></br>
 						</p>
@@ -261,7 +266,8 @@
 				{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 				{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 				{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-				{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } }
+				{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+				{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
 			</script>
