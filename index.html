@@ -39,25 +39,31 @@
 						</p>
 
 						<aside class="notes">
-				        Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window
-								(hit 's' on your keyboard).
-				    </aside>
+				        	Go over what the talk will be about - Introduction to the JavaScript garbage collector with emphasis on the V8 engine and some tools and techniques on how to find and solve memory issues in your web application.
+				    	</aside>
+					</section>
+
+					<section id="intro">
+						<h2>Who is this guy?</h2>
+						<img src="img/screenshots/whoIsWintellect.jpg">
+
+						<aside class="notes">
+							Mention about the company and how notable the founders are. Can also tell the story on taking the performance class that got me into learning more on performance.
+						</aside>
 					</section>
 
 					<section id="agenda">
 						<h2>Agenda</h2>
 						<ul>
-							<li>Intro</li>
 							<li>Why should you care?</li>
 							<li>Garbage Collector algorithms</li>
 							<li>Dev Tools Overview</li>
 							<li>Demo</li>
 						</ul>
-					</section>
 
-					<section id="intro">
-						<h2>Who is this guy?</h2>
-						<a class="image" href="http://www.wintellect.com"><img width="620" height="240" src="img/logos/WintellectLogo.jpg" alt="Wintellect"></a>
+						<aside class="notes">
+							Briefly go over the agenda to let everyone know what will be covered.
+						</aside>
 					</section>
 
 					<section>
@@ -69,6 +75,10 @@
 								<li class="fragment">...and more memory</li>
 							</ol>
 						</section>
+
+						<aside class="notes">
+							Relate to the importance of performance implications in .NET. The same thing is happening in JavaScript.
+						</aside>
 					</section>
 
 					<section id="whyMatter">
@@ -76,10 +86,18 @@
 							<h2>Why does this matter with JavaScript?</h2>
 							<img class="fragment" src="img/screenshots/hesdead.png">
 						</section>
+
+						<aside class="notes">
+							Mention to how much JavaScript is being much more widely used and that functionality is getting put more on the client than on the server. Mention SPAs as well and say that with these, page refreshes are becoming much less frequent so items stay in memory much longer. Also, users can leave up pages going for days which leaves items in memory.
+						</aside>
 					</section>
 
 					<section id="javascriptMemory">
-						<h2>How does memory work in JavaScript (V8 engie)?</h2>
+						<h2>How does memory work in JavaScript?</h2>
+
+						<aside class="notes">
+							This is for the regular mark and sweep algorithm. Introduce the object graph, as well.
+						</aside>
 					</section>
 
 					<section id="primitiveTypes">
@@ -119,21 +137,33 @@ isTruthy = false; // Oh, noes!
 					<section id="objectGraph">
 						<h2>JavaScript Object Graph</h2>
 						<img src="img/diagrams/JavaScript Object Graph.jpg">
+
+						<aside class="notes">
+							Graph is showing objects related to the root node. Objects can reference other objects.
+						</aside>
 					</section>
 
 					<section id="beforeGC">
 						<h2>Before a GC</h2>
 						<img src="img/diagrams/JavaScript Object Graph Before GC.jpg">
+
+						<aside class="notes">
+							To one object, the reference to the root node is gone. During the GC, this will get marked to remove from memory.
+						</aside>
 					</section>
 
 					<section id="afterGC">
 						<h2>After a GC</h2>
 						<img src="img/diagrams/JavaScript Object Graph After GC.jpg">
+
+						<aside class="notes">
+							GC was completed and the marked objects were cleared from memory allowing new values to be allocated to the heap.
+						</aside>
 					</section>
 
 					<section id="v8Engine">
 						<section id="generations">
-							<h2>V8 Engine</h2>
+							<h2>V8 Engine Specifics</h2>
 							<ul>
 								<li class="fragment">Generational</li>
 								<ul class="fragment">
@@ -142,6 +172,10 @@ isTruthy = false; // Oh, noes!
 								</ul>
 							</ul>
 						</section>
+
+						<aside class="notes">
+							Relate this back to .NET with the generational algorithm it has.
+						</aside>
 					</section>
 
 					<section id="youngGen">
@@ -150,6 +184,10 @@ isTruthy = false; // Oh, noes!
 							<ul>
 								<li class="fragment">Split into two spaces - to and from</li>
 							</ul>
+
+							<aside class="notes">
+								GC was completed and the marked objects were cleared from memory allowing new values to be allocated to the heap.
+							</aside>
 						</section>
 
 						<section class="fragment" id="toAndFrom">
