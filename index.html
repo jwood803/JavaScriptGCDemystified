@@ -192,30 +192,59 @@ isTruthy = false; // Oh, noes!
 
 						<section class="fragment" id="toAndFrom">
 							<img src="img/diagrams/Young Gen/1-toAndFrom.jpg">
+
+							<aside class="notes">
+								Young Gen is broken up into two spaces - To and From. The To space is where new objects are allocated. The From
+								space is only used during a GC to sweep the objects.
+							</aside>
 						</section>
 
 						<section class="fragment" id="beforeYoungGC">
 							<img src="img/diagrams/Young Gen/2-beforeGC.jpg">
+
+							<aside class="notes">
+								Items are being allocated.
+							</aside>
 						</section>
 
 						<section class="fragment" id="GCTriggered">
-							<img src="img/diagrams/Young Gen/3-GCTriggered.jpg">c
+							<img src="img/diagrams/Young Gen/3-GCTriggered.jpg">
+
+							<aside class="notes">
+								When trying to allocate "E", there's not enough room on the heap. This triggers a GC and the page is now paused.
+							</aside>
 						</section>
 
 						<section class="fragment" id="swapToFromSpace">
 							<img src="img/diagrams/Young Gen/4-swapToFromSpace.jpg">
+
+							<aside class="notes">
+								The objects in the To space are swapped to the Frome space.
+							</aside>
 						</section>
 
 						<section class="fragment" id="fromSpaceSweep">
 							<img src="img/diagrams/Young Gen/5-fromSpaceSweep.jpg">
+
+							<aside class="notes">
+								Objects are swept to see if they have any references to the root node.
+							</aside>
 						</section>
 
 						<section class="fragment" id="afterSweeping">
 							<img src="img/diagrams/Young Gen/6-afterSweeping.jpg">
+
+							<aside class="notes">
+								After sweeping, "B" was found to not have a reference to the root node.
+							</aside>
 						</section>
 
 						<section class="fragment" id="afterYoungGC">
 							<img src="img/diagrams/Young Gen/7-afterGC.jpg">
+
+							<aside class="notes">
+								All live objects are copied back to the To space. The page is now resumed.
+							</aside>
 						</section>
 					</section>
 
@@ -245,6 +274,20 @@ isTruthy = false; // Oh, noes!
 							<li>usedJSHeapSize - Memory currently being used</li>
 							<li>totalJSHeapSize - Memory that has been allocated on the JavaScript heap (includes free space)</li>
 						</ul>
+
+						<aside class="notes">
+							Also mention the caveat Chrome has that, even though each tab is a separate process, it can spawn a finite number of processes.
+							So if there are a lot of tabs open, multiple tabs can share a process. If that's the case, the memory of the other tabs will
+							be represented by the API call.
+						</aside>
+					</section>
+
+					<section id="devTools">
+						<img src="img/screenshots/devTools.jpg">
+
+						<aside class="notes">
+							How to get to the Dev Tools.
+						</aside>
 					</section>
 
 					<section id="demo">
