@@ -253,6 +253,12 @@ isTruthy = false; // Oh, noes!
 						<ul>
 							<li class="fragment"><strong>Infrequently</strong> collected</li>
 						</ul>
+
+						<aside class="notes">
+							Mention when objects get allocated here (after a young gen).
+
+							Infrequent since most objects (around 70% to 90% don't survive a young gen).
+						</aside>
 					</section>
 
 					<section id="findIssues">
@@ -276,7 +282,7 @@ isTruthy = false; // Oh, noes!
 						</ul>
 
 						<aside class="notes">
-							Also mention the caveat Chrome has that, even though each tab is a separate process, it can spawn a finite number of processes.
+							Mention the caveat Chrome has that, even though each tab is a separate process, it can spawn a finite number of processes.
 							So if there are a lot of tabs open, multiple tabs can share a process. If that's the case, the memory of the other tabs will
 							be represented by the API call.
 						</aside>
@@ -286,7 +292,18 @@ isTruthy = false; // Oh, noes!
 						<img src="img/screenshots/devTools.jpg">
 
 						<aside class="notes">
-							How to get to the Dev Tools.
+<!-- 							How to get to the Dev Tools. -->
+						</aside>
+					</section>
+
+					<section id="heapProfiler">
+						Show screenshot of the profiler
+
+						<aside class="notes">
+							Blue bars indicate objects that are still live at the end of the timeline, gray bars indicate objects that were allocated during
+							the timeline, but have since been garbage collected.
+
+
 						</aside>
 					</section>
 
@@ -294,10 +311,20 @@ isTruthy = false; // Oh, noes!
 						<h2>Demo time!</h2>
 					</section>
 
+					<section id="dangerousOutThere">
+						<img src="img/screenshots/itsDangerous.jpg">
+					</section>
+
 					<section id="takeAways">
-						<section id="takeAwayFragments">
-							<img src="img/screenshots/itsDangerous.jpg">
-						</section>
+						<ul>
+							<li class="fragment">How much memory is the page using?</li>
+							<li class="fragment">Is the page GCing too frequently?</li>
+						</ul>
+
+						<aside class="notes">
+							1. Using more memory can be detrimental to the page's performance since it will cause more GCs which will cause the page to be paused more frequently.
+							2. This can be found out by using the timeline tool.
+						</aside>
 					</section>
 
 					<section id="relatedInfo">
