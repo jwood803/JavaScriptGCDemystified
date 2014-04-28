@@ -96,7 +96,7 @@
 						<h2>How does memory work in JavaScript?</h2>
 
 						<aside class="notes">
-							This is for the regular mark and sweep algorithm. Introduce the object graph, as well.
+							This is for the regular mark and sweep algorithm. Introduce the object graph, as well, in which all JavaScript values are part of the object graph.
 						</aside>
 					</section>
 
@@ -128,10 +128,20 @@ var isTruthy = true;
 isTruthy = false; // Oh, noes!
 							</code></pre>
 						</section>
+
+						<aside class="notes">
+							These primitive types cannot reference any other values. The only container type is the Object.
+
+							An Array in JavaScript is actually an Object that has numeric keys.
+						</aside>
 					</section>
 
 					<section id="duringGC">
 						<h2>What happens during a GC in JavaScript?</h2>
+
+						<aside class="notes">
+							The browser is what decides when to do a GC
+						</aside>
 					</section>
 
 					<section id="objectGraph">
@@ -186,7 +196,7 @@ isTruthy = false; // Oh, noes!
 							</ul>
 
 							<aside class="notes">
-								GC was completed and the marked objects were cleared from memory allowing new values to be allocated to the heap.
+
 							</aside>
 						</section>
 
@@ -243,7 +253,7 @@ isTruthy = false; // Oh, noes!
 							<img src="img/diagrams/Young Gen/7-afterGC.jpg">
 
 							<aside class="notes">
-								All live objects are copied back to the To space. The page is now resumed.
+								All live objects are copied back to the To space or promoted to the Old gen. The page is now resumed.
 							</aside>
 						</section>
 					</section>
@@ -255,7 +265,7 @@ isTruthy = false; // Oh, noes!
 						</ul>
 
 						<aside class="notes">
-							Mention when objects get allocated here (after a young gen).
+							After a value is sufficiently old (how many young gen collections it survives) it is tenured into the old generation.
 
 							Infrequent since most objects (around 70% to 90% don't survive a young gen).
 						</aside>
@@ -292,12 +302,12 @@ isTruthy = false; // Oh, noes!
 						<img src="img/screenshots/devTools.jpg">
 
 						<aside class="notes">
-<!-- 							How to get to the Dev Tools. -->
+							How to get to the Dev Tools.
 						</aside>
 					</section>
 
 					<section id="heapProfiler">
-						Show screenshot of the profiler
+						Screenshot of the profiler here
 
 						<aside class="notes">
 							Blue bars indicate objects that are still live at the end of the timeline, gray bars indicate objects that were allocated during
@@ -308,7 +318,7 @@ isTruthy = false; // Oh, noes!
 					</section>
 
 					<section id="demo">
-						<h2>Demo time!</h2>
+						<h2><a href="js/Demo/index.html">Demo</a> time!</h2>
 					</section>
 
 					<section id="dangerousOutThere">
