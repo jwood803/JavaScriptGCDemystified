@@ -195,9 +195,6 @@ isTruthy = false; // Oh, noes!
 					<section id="youngGen">
 						<section class="fragment" id="youngGenIntro">
 							<h2>Young Generation</h2>
-							<ul>
-								<li class="fragment">Split into two spaces - to and from</li>
-							</ul>
 
 							<aside class="notes">
 								Down arrow here!
@@ -208,7 +205,7 @@ isTruthy = false; // Oh, noes!
 							<img src="img/diagrams/Young Gen/1-toAndFrom.jpg">
 
 							<aside class="notes">
-								Young Gen is broken up into two spaces - To and From. The To space is where new objects are allocated. The From
+								Young Gen is broken up into two semi-spaces equally sized - To and From. The To space is where new objects are allocated. The From
 								space is only used during a GC to sweep the objects.
 							</aside>
 						</section>
@@ -233,7 +230,7 @@ isTruthy = false; // Oh, noes!
 							<img src="img/diagrams/Young Gen/4-swapToFromSpace.jpg">
 
 							<aside class="notes">
-								The objects in the To space are swapped to the Frome space.
+								The objects swapped between the To space and the From space.
 							</aside>
 						</section>
 
@@ -241,7 +238,7 @@ isTruthy = false; // Oh, noes!
 							<img src="img/diagrams/Young Gen/5-fromSpaceSweep.jpg">
 
 							<aside class="notes">
-								Objects are swept to see if they have any references to the root node.
+								After a sweep of all objects all live objects are found (they have a retaining path to the root node).
 							</aside>
 						</section>
 
@@ -257,7 +254,8 @@ isTruthy = false; // Oh, noes!
 							<img src="img/diagrams/Young Gen/7-afterGC.jpg">
 
 							<aside class="notes">
-								All live objects are copied back to the To space or promoted to the Old gen. The page is now resumed.
+								All <strong><em>live</em></strong> objects are copied back to the To space or promoted to the Old gen.
+								The From space is cleared to be reused for the next collection. The page is now resumed.
 							</aside>
 						</section>
 					</section>
