@@ -39,8 +39,9 @@
 						</p>
 
 						<aside class="notes">
-				        	Go over what the talk will be about - Introduction to the JavaScript garbage collector with emphasis on the V8 engine and some tools and techniques on how to find and solve memory issues in your web application.
-				    	</aside>
+				    	Go over what the talk will be about - Introduction to the JavaScript garbage collector with emphasis on the V8 engine and some tools and techniques
+							on how to find and solve memory issues in your web application.
+				    </aside>
 					</section>
 
 					<section id="intro">
@@ -48,15 +49,17 @@
 						<img src="img/screenshots/whoIsWintellect.jpg">
 
 						<aside class="notes">
-							Mention about the company and how notable the founders are. Can also tell the story on taking the performance class that got me into learning more on performance.
+							Mention about the company and how notable the founders are. Can also tell the story on taking the performance class that got me into learning
+							more on performance. Also relate to WintellectNOW and the promotion/give-a-ways.
 						</aside>
 					</section>
 
 					<section id="agenda">
 						<h2>Agenda</h2>
 						<ul>
-							<li>Why should you care?</li>
-							<li>Garbage Collector algorithms</li>
+							<li>Why does this matter?</li>
+							<li>General Garbage Collector details</li>
+							<li>V8 Engine Specifics</li>
 							<li>Dev Tools Overview</li>
 							<li>Demo</li>
 						</ul>
@@ -88,7 +91,9 @@
 						</section>
 
 						<aside class="notes">
-							Mention to how much JavaScript is being much more widely used and that functionality is getting put more on the client than on the server. Mention SPAs as well and say that with these, page refreshes are becoming much less frequent so items stay in memory much longer. Also, users can leave up pages going for days which leaves items in memory.
+							Mention to how much JavaScript is being much more widely used and that functionality is getting put more on the client than on the server.
+							Mention SPAs as well and say that with these, page refreshes are becoming much less frequent so items stay in memory much longer. Also,
+							users can leave up pages going for days which leaves objects in memory.
 						</aside>
 					</section>
 
@@ -144,7 +149,7 @@ isTruthy = false; // Oh, noes!
 						<h2>What happens during a GC in JavaScript?</h2>
 
 						<aside class="notes">
-							The browser is what decides when to do a GC
+							A little look at how JavaScript will conduct a mark-and-sweep algorithm through the object graph.
 						</aside>
 					</section>
 
@@ -153,7 +158,8 @@ isTruthy = false; // Oh, noes!
 						<img src="img/diagrams/JavaScript Object Graph.jpg">
 
 						<aside class="notes">
-							Graph is showing objects related to the root node. Objects can reference other objects.
+							Graph is showing objects related to the root node. Objects can reference other objects, but values (scalar) nodes will only
+							be as the leaf node.
 						</aside>
 					</section>
 
@@ -205,57 +211,98 @@ isTruthy = false; // Oh, noes!
 							<img src="img/diagrams/Young Gen/1-toAndFrom.jpg">
 
 							<aside class="notes">
-								Young Gen is broken up into two semi-spaces equally sized - To and From. The To space is where new objects are allocated. The From
-								space is only used during a GC to sweep the objects.
+								Young Gen is broken up into two semi-spaces equally sized - To and From. The To space is where all new objects are allocated.
+								The From space is only used during a GC to sweep for live objects.
 							</aside>
 						</section>
 
-						<section class="fragment" id="beforeYoungGC">
-							<img src="img/diagrams/Young Gen/2-beforeGC.jpg">
+						<section class="fragment" id="allocateA">
+							<img src="img/diagrams/Young Gen/2-allocateA.jpg">
 
 							<aside class="notes">
-								Items are being allocated.
+								Going through the app and "A" gets allocated.
 							</aside>
 						</section>
 
-						<section class="fragment" id="GCTriggered">
-							<img src="img/diagrams/Young Gen/3-GCTriggered.jpg">
+						<section class="fragment" id="allocateB">
+							<img src="img/diagrams/Young Gen/3-allocateB.jpg">
 
 							<aside class="notes">
-								When trying to allocate "E", there's not enough room on the heap. This triggers a GC and the page is now paused.
+								...and now "B" gets allocated.
 							</aside>
 						</section>
 
-						<section class="fragment" id="swapToFromSpace">
-							<img src="img/diagrams/Young Gen/4-swapToFromSpace.jpg">
+						<section class="fragment" id="allocateC">
+							<img src="img/diagrams/Young Gen/4-allocateC.jpg">
 
 							<aside class="notes">
-								The objects swapped between the To space and the From space.
+								...now "C" gets allocated.
 							</aside>
 						</section>
 
-						<section class="fragment" id="fromSpaceSweep">
-							<img src="img/diagrams/Young Gen/5-fromSpaceSweep.jpg">
+						<section class="fragment" id="allocateD">
+							<img src="img/diagrams/Young Gen/5-allocateD.jpg">
 
 							<aside class="notes">
-								After a sweep of all objects all live objects are found (they have a retaining path to the root node).
+								...and "D" gets allocated.
 							</aside>
 						</section>
 
-						<section class="fragment" id="afterSweeping">
-							<img src="img/diagrams/Young Gen/6-afterSweeping.jpg">
+						<section class="fragment" id="allocateE">
+							<img src="img/diagrams/Young Gen/6-allocateE.jpg">
 
 							<aside class="notes">
-								After sweeping, "B" was found to not have a reference to the root node.
+								"E" is now trying to allocate, but it's too big to fit in the space available. This triggers a GC.
 							</aside>
 						</section>
 
-						<section class="fragment" id="afterYoungGC">
-							<img src="img/diagrams/Young Gen/7-afterGC.jpg">
+						<section class="fragment" id="gcTriggered">
+							<img src="img/diagrams/Young Gen/7-gcTriggered.jpg">
 
 							<aside class="notes">
-								All <strong><em>live</em></strong> objects are copied back to the To space or promoted to the Old gen.
-								The From space is cleared to be reused for the next collection. The page is now resumed.
+								"E" doesn't get allocated and a GC starts. The page is now paused from any other script execution.
+							</aside>
+						</section>
+
+						<section class="fragment" id="spacesSwap">
+							<img src="img/diagrams/Young Gen/8-spacesSwap.jpg">
+
+							<aside class="notes">
+								The To and From spaces swap (interally, the labels to the objects are just switched).
+							</aside>
+						</section>
+
+						<section class="fragment" id="spacesSwap">
+							<img src="img/diagrams/Young Gen/9-liveObjectsMarked.jpg">
+
+							<aside class="notes">
+								Within the From space the live objects are now being marked. "A" and "D" haven't been marked since it
+								can't find a retaining path back to the root node and is considered garbage.
+							</aside>
+						</section>
+
+						<section class="fragment" id="spacesSwap">
+							<img src="img/diagrams/Young Gen/10-copyToSpace.jpg">
+
+							<aside class="notes">
+								All live objects that have been marked is now copied back to the To space. This is where most of the
+								time occurs during a GC.
+							</aside>
+						</section>
+
+						<section class="fragment" id="spacesSwap">
+							<img src="img/diagrams/Young Gen/11-fromSpaceRecycled.jpg">
+
+							<aside class="notes">
+								The entire From space now gets recycled and ready for the next use.
+							</aside>
+						</section>
+
+						<section class="fragment" id="spacesSwap">
+							<img src="img/diagrams/Young Gen/12-allocateEAgain.jpg">
+
+							<aside class="notes">
+								The page now resumes and "E" is able to be allocated.
 							</aside>
 						</section>
 					</section>
