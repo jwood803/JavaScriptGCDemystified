@@ -39,15 +39,20 @@
 						</p>
 
 						<aside class="notes">
-				    	Go over what the talk will be about - Introduction to the JavaScript garbage collector with emphasis on the V8 engine and some tools and techniques
-							on how to find and solve memory issues in your web application.
+				    	Go over what the talk will be about - Introduction to the JavaScript
+							garbage collector with emphasis on the V8 engine and some tools and
+							techniques on how to find and solve memory issues in your web application.
 				    </aside>
 					</section>
 
 					<section id="intro">
 						<h2>Who is this guy?</h2>
-						<img src="img/screenshots/whoIsWintellect.jpg">
+<!-- 						<img src="img/screenshots/whoIsWintellect.jpg"> -->
+						Show Wintellect logo
 
+						Show consulting/training screenshot.
+
+						Show WintellectNow logo.
 						<aside class="notes">
 							Mention about the company and how notable the founders are. Can also tell the story on taking the performance class that got me into learning
 							more on performance. Also relate to WintellectNOW and the promotion/give-a-ways.
@@ -77,24 +82,26 @@
 								<li class="fragment">...memory</li>
 								<li class="fragment">...and more memory</li>
 							</ol>
-						</section>
 
-						<aside class="notes">
-							Relate to the importance of performance implications in .NET. The same thing is happening in JavaScript.
-						</aside>
+							<aside class="notes">
+								Relate to the importance of performance implications in .NET. The same thing is happening in JavaScript.
+
+								Down arrow for next slide!
+							</aside>
+						</section>
 					</section>
 
 					<section id="whyMatter">
 						<section class="fragment" id="deadJim">
 							<h2>Why does this matter with JavaScript?</h2>
 							<img class="fragment" src="img/screenshots/hesdead.png">
-						</section>
 
-						<aside class="notes">
-							Mention to how much JavaScript is being much more widely used and that functionality is getting put more on the client than on the server.
-							Mention SPAs as well and say that with these, page refreshes are becoming much less frequent so items stay in memory much longer. Also,
-							users can leave up pages going for days which leaves objects in memory.
-						</aside>
+							<aside class="notes">
+								Mention to how much JavaScript is being much more widely used and that functionality is getting put more on the client than on the server.
+								Also make a special note about SPAs as well and say that with these, page refreshes are becoming much less frequent so items stay in memory much longer. Also,
+								users can leave up pages going for days which leaves objects in memory.
+							</aside>
+						</section>
 					</section>
 
 					<section id="javascriptMemory">
@@ -427,7 +434,7 @@ isTruthy = false; // Oh, noes!
 						<aside class="notes">
 							1. Using more memory can be detrimental to the page's performance since it will cause more frequent GCs which will cause the page
 							a lot of pauses to the page to perform the collections.
-							
+
 							2. This can be found out by using the timeline tool.
 						</aside>
 					</section>
@@ -437,6 +444,11 @@ isTruthy = false; // Oh, noes!
 						<ul>
 							<li><a href="http://www.html5rocks.com/en/tutorials/memory/effectivemanagement/">Effectively Managing Memory at Gmail Scale</a></li>
 							<li><a href="http://coding.smashingmagazine.com/2012/11/05/writing-fast-memory-efficient-javascript/">Writing Fast Memory Efficient JavaScript</a></li>
+							<h4>Chrome Docs</h4>
+							<ul>
+								<li><a href="https://developers.google.com/chrome-developer-tools/docs/javascript-memory-profiling#heap_profiler">Heap Profiler</a></li>
+								<li><a href="https://developers.google.com/chrome-developer-tools/docs/timeline#memory_mode">Memory Timeline</a></li>
+							</ul>
 						</ul>
 					</section>
 
