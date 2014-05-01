@@ -360,6 +360,7 @@ isTruthy = false; // Oh, noes!
 					</section>
 
 					<section id="timeline">
+						<h2>Timeline</h2>
 						<section class="fragment" id="timelinePlain">
 							<img src="img/screenshots/timeline.jpg">
 
@@ -380,13 +381,24 @@ isTruthy = false; // Oh, noes!
 					</section>
 
 					<section id="heapProfiler">
-						Screenshot of the profiler here
+						<h2>Heap profiler</h2>
+						<img src="img/screenshots/heapStart.jpg">
+
+						<aside class="notes">
+							Showing which one to use when trying to find memory issues.
+						</aside>
+					</section>
+
+					<section id="heapTimeline">
+						<img src="img/screenshots/heapTimeline.jpg">
 
 						<aside class="notes">
 							Blue bars indicate objects that are still live at the end of the timeline, gray bars indicate objects that were allocated during
 							the timeline, but have since been garbage collected.
 
-
+							In the retaining tree, you'll notice two colors - yellow and red. Red is when the object doesn't have direct references from
+							JavaScript to them, but are alive. Yellow nodes do have direct references from JavaScript. There should be a chain of properties
+							leading from the DOM window to the element (i.e. window.foo.bar[2]).
 						</aside>
 					</section>
 
@@ -394,7 +406,7 @@ isTruthy = false; // Oh, noes!
 						<h2><a href="js/Demo/index.html">Demo</a> time!</h2>
 
 						<aside class="notes">
-							Demo notes here!
+
 						</aside>
 					</section>
 
@@ -402,7 +414,7 @@ isTruthy = false; // Oh, noes!
 						<img src="img/screenshots/itsDangerous.jpg">
 
 						<aside class="notes">
-							JavaScript can be dangerous if it's abused too much!
+							JavaScript can be dangerous if it's abused too much! Too much memory = very frequent GCs = unhappy users
 						</aside>
 					</section>
 
@@ -415,6 +427,7 @@ isTruthy = false; // Oh, noes!
 						<aside class="notes">
 							1. Using more memory can be detrimental to the page's performance since it will cause more frequent GCs which will cause the page
 							a lot of pauses to the page to perform the collections.
+							
 							2. This can be found out by using the timeline tool.
 						</aside>
 					</section>
