@@ -31,7 +31,11 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section>
+				<section id="sponsors">
+					<img src="img/screenshots/sponsors.jpg">
+				</section>
+
+				<section id="start">
 					<h1>JavaScript Garbage Collector Demystified</h1>
 					<p>
 						<small>Created by Jonathan Wood</br>
@@ -46,17 +50,23 @@
 					</section>
 
 					<section id="intro">
-						<h2>Who is this guy?</h2>
-<!-- 						<img src="img/screenshots/whoIsWintellect.jpg"> -->
-						Show Wintellect logo
+						<section class="fragment" id="aboutWintellect">
+							<h2>Who is this guy?</h2>
+							<img src="img/screenshots/wintellectAbout.jpg">
 
-						Show consulting/training screenshot.
+							<aside class="notes">
+								Mention about the company and how notable the founders are. Can also tell the story on taking the performance class that got me into learning
+								more on performance. Also relate to WintellectNOW and the promotion/give-a-ways.
+							</aside>
+						</section>
 
-						Show WintellectNow logo.
-						<aside class="notes">
-							Mention about the company and how notable the founders are. Can also tell the story on taking the performance class that got me into learning
-							more on performance. Also relate to WintellectNOW and the promotion/give-a-ways.
-						</aside>
+						<section class="fragment" id="aboutWintellectNow">
+							<img src="img/screenshots/wintellectNow.jpg">
+
+							<aside class="notes">
+								On demand training that features top instructurs. Perfect segue to mention the promotion.
+							</aside>
+						</section>
 					</section>
 
 					<section id="agenda">
@@ -198,11 +208,11 @@ isTruthy = false; // Oh, noes!
 									<li>Old</li>
 								</ul>
 							</ul>
-						</section>
 
-						<aside class="notes">
-							Relate this back to .NET with the generational algorithm it has.
-						</aside>
+							<aside class="notes">
+								Down arrow here! Relate this back to .NET with the generational algorithm it has.
+							</aside>
+						</section>
 					</section>
 
 					<section id="youngGen">
@@ -259,7 +269,7 @@ isTruthy = false; // Oh, noes!
 							<img src="img/diagrams/Young Gen/6-allocateE.jpg">
 
 							<aside class="notes">
-								"E" is now trying to allocate, but it's too big to fit in the space available. This triggers a GC.
+								"E" is now trying to allocate, but it's too big to fit in the space available.
 							</aside>
 						</section>
 
@@ -267,7 +277,7 @@ isTruthy = false; // Oh, noes!
 							<img src="img/diagrams/Young Gen/7-gcTriggered.jpg">
 
 							<aside class="notes">
-								"E" doesn't get allocated and a GC starts. The page is now paused from any other script execution.
+								"E" doesn't get allocated and a GC is triggered. The page is now paused from any other script execution.
 							</aside>
 						</section>
 
@@ -275,7 +285,8 @@ isTruthy = false; // Oh, noes!
 							<img src="img/diagrams/Young Gen/8-spacesSwap.jpg">
 
 							<aside class="notes">
-								The To and From spaces swap (interally, the labels to the objects are just switched).
+								The To and From spaces swap (interally, the labels to the objects are just switched). Now the From space will
+								get swept and all live objects will get marked.
 							</aside>
 						</section>
 
@@ -283,8 +294,7 @@ isTruthy = false; // Oh, noes!
 							<img src="img/diagrams/Young Gen/9-liveObjectsMarked.jpg">
 
 							<aside class="notes">
-								Within the From space the live objects are now being marked. "A" and "D" haven't been marked since it
-								can't find a retaining path back to the root node and is considered garbage.
+								W"A" and "D" haven't been marked since it can't find a retaining path back to the root node and is considered garbage.
 							</aside>
 						</section>
 
@@ -321,7 +331,8 @@ isTruthy = false; // Oh, noes!
 						</ul>
 
 						<aside class="notes">
-							After a value is sufficiently old (how many young gen collections it survives) it is tenured into the old generation.
+							After a value is sufficiently old (how many young gen collections it survives - usually the standard
+							is surviving two young generations) it is tenured into the old generation.
 
 							Infrequent since most objects (around 70% to 90% don't survive a young gen).
 						</aside>
@@ -335,6 +346,12 @@ isTruthy = false; // Oh, noes!
 								<li class="fragment">Crashes</li>
 								<li class="fragment">Collecting data</li>
 							</ul>
+
+							<aside class="notes">
+								Users - They will let you know when your site is slow. Listen to them!
+								Crashes - The "he's dead, Jim" will occur often.
+								Collecting data -
+							</aside>
 						</section>
 					</section>
 
@@ -348,6 +365,12 @@ isTruthy = false; // Oh, noes!
 						</ul>
 
 						<aside class="notes">
+						  heapSizeLimit - The total amount that JS has access to.
+							usedHeapSize - Memory that currently is in use by live objects.
+							totalHeapSize - Memory that has been allocated so far, inclusing free space.
+
+							This can be used for logging and even used for graphing. Information can be used to predict the "he's dead, Jim".
+
 							Mention the caveat Chrome has that, even though each tab is a separate process, it can spawn a finite number of processes.
 							So if there are a lot of tabs open, multiple tabs can share a process. If that's the case, the memory of the other tabs will
 							be represented by the API call.
@@ -413,7 +436,10 @@ isTruthy = false; // Oh, noes!
 						<h2><a href="js/Demo/index.html">Demo</a> time!</h2>
 
 						<aside class="notes">
+							Small messaging app that caches messages for better performance for the users. Only 5 messages should be cached at a time.
 
+							MessageAuxData = message header. There would be a count of 6 (should be 5).
+							Clicking a blue bar displays a diff of what's still live at that time. A grey bar should show nothing.
 						</aside>
 					</section>
 
@@ -435,7 +461,9 @@ isTruthy = false; // Oh, noes!
 							1. Using more memory can be detrimental to the page's performance since it will cause more frequent GCs which will cause the page
 							a lot of pauses to the page to perform the collections.
 
-							2. This can be found out by using the timeline tool.
+							2. This can be found out by using the timeline tool. A lot of GCs = allocating a lot of objects.
+
+							The more memory, the longer the pause needed to do the collection. Leads to poor user interaction and users will be frustrated.
 						</aside>
 					</section>
 
